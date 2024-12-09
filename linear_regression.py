@@ -1,6 +1,8 @@
 import csv  # For reading and parsing CSV files
 import numpy as np  # For numerical operations
 import matplotlib.pyplot as plt  # For creating plots
+import matplotlib
+matplotlib.use('TkAgg')
 from datetime import datetime, timedelta  # For handling date and time operations
 from sklearn.linear_model import LinearRegression  # For performing linear regression
 
@@ -68,7 +70,7 @@ def plot_linear_regression_prediction(dates, prices, future_days, predictions, t
         predictions (tuple): Predicted x-values and y-values.
         training_window (int): Number of data points used for training.
     """
-    x_future, predicted_prices = predictions  # Unpack future indices and predicted prices
+    _, predicted_prices = predictions  # Unpack future indices and predicted prices
 
     # Generate future dates starting from the last historical date
     last_date = dates[-1]
@@ -94,14 +96,14 @@ def plot_linear_regression_prediction(dates, prices, future_days, predictions, t
     plt.show()
 
 # Main Script
-file_path = "META.csv"  # Path to the CSV file containing stock data
-dates, prices = load_csv(file_path)  # Load dates and prices from the CSV
+# file_path = "Bitcoin.csv"  # Path to the CSV file containing stock data
+# dates, prices = load_csv(file_path)  # Load dates and prices from the CSV
 
-future_days = 60  # Number of days to predict into the future
-training_window = 300  # Number of most recent data points to use for training
+# future_days = 50  # Number of days to predict into the future
+# training_window = 365  # Number of most recent data points to use for training
 
-# Predict stock prices using Linear Regression
-linear_predictions = predict_with_linear_regression(dates, prices, future_days, training_window)
+# # Predict stock prices using Linear Regression
+# linear_predictions = predict_with_linear_regression(dates, prices, future_days, training_window)
 
-# Plot the historical data and predictions
-plot_linear_regression_prediction(dates, prices, future_days, linear_predictions, training_window)
+# # Plot the historical data and predictions
+# plot_linear_regression_prediction(dates, prices, future_days, linear_predictions, training_window)

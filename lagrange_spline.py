@@ -93,7 +93,8 @@ def cubic_spline_interpolation(x, y, x_eval):
 
     # Compute a coefficients (the y-values at known points)
     a_coeff = y[:-1]
-
+    if(isinstance(x_eval[0], np.ndarray)):
+        x_eval=x_eval[0]
     # Interpolate the values at x_eval
     interpolated = []
     for x_val in x_eval:
@@ -101,12 +102,7 @@ def cubic_spline_interpolation(x, y, x_eval):
             if x[i] <= x_val <= x[i+1]:  # Check which interval x_val belongs to
                 dx = x_val - x[i]  # Difference from the starting point of the interval
                 # Compute the cubic spline value using the formula
-                value = (
-                    a_coeff[i]
-                    + b_coeff[i] * dx
-                    + c[i] * dx**2
-                    + d_coeff[i] * dx**3
-                )
+                value = (a_coeff[i]+ b_coeff[i] * dx+ c[i] * dx**2+ d_coeff[i] * dx**3)
                 interpolated.append(value)
                 break  # Exit the loop once the interval is found
     return np.array(interpolated)
@@ -123,14 +119,9 @@ def interpolate_with_lagrange(dates, prices):
         np.ndarray: Indices for interpolated values.
         np.ndarray: Interpolated stock prices.
     """
-    num_points = 12  # Number of sample points for Lagrange interpolation
-    indices = np.linspace(0, len(dates) - 1, num=num_points, dtype=int)  # Sample indices
-    x_subset = indices  # x-values of known points
-    y_subset = np.array(prices)[indices]  # y-values of known points
-
-    x_eval = np.arange(len(dates))  # Evaluate interpolation for all indices
-    interpolated_prices = lagrange_interpolation(x_subset, y_subset, x_eval)
-    return x_eval, interpolated_prices
+    indices = np.linspace(0, len(dates) - 1, num=12, dtype=int)  # Sample indices
+    x_eval=np.arange(len(dates))
+    return x_eval, lagrange_interpolation(indices, np.array(prices)[indices], x_eval)
 
 def interpolate_with_splines(dates, prices):
     """
@@ -145,9 +136,7 @@ def interpolate_with_splines(dates, prices):
         np.ndarray: Interpolated stock prices.
     """
     x = np.arange(len(dates))  # Treat dates as sequential indices for simplicity
-    x_eval = np.arange(len(dates))  # Evaluate interpolation for all indices
-    interpolated_prices = cubic_spline_interpolation(x, prices, x_eval)
-    return x_eval, interpolated_prices
+    return x, cubic_spline_interpolation(x, prices, x)
 
 def plot_stock_prices(dates, prices, lagrange_x, lagrange_prices, spline_x, spline_prices):
     """
@@ -180,12 +169,12 @@ def plot_stock_prices(dates, prices, lagrange_x, lagrange_prices, spline_x, spli
     plt.show()
 
 # Load the stock price data from the CSV file
-file_path = "META.csv"  # Update with your CSV file path
-dates, prices = load_csv(file_path)
+# file_path = "META.csv"  # Update with your CSV file path
+# dates, prices = load_csv(file_path)
 
 # Interpolate the current prices using Lagrange and cubic splines
-lagrange_x, lagrange_prices = interpolate_with_lagrange(dates, prices)
-spline_x, spline_prices = interpolate_with_splines(dates, prices)
+# lagrange_x, lagrange_prices = interpolate_with_lagrange(dates, prices)
+# spline_x, spline_prices = interpolate_with_splines(dates, prices)
 
-# Plot the results
-plot_stock_prices(dates, prices, lagrange_x, lagrange_prices, spline_x, spline_prices)
+# # Plot the results
+# plot_stock_prices(dates, prices, lagrange_x, lagrange_prices, spline_x, spline_prices)
