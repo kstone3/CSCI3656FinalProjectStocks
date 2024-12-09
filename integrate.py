@@ -58,9 +58,10 @@ def loadCsv(file_path):
     return dates, prices,total_shares
 
 def main():
-    file_path = input("Enter the CSV file path: ")
-    #file_path='SPY.csv'
-    dates, prices,total_shares = loadCsv(file_path)
+    #file_path = input("Enter the CSV file path: ")
+    file='META'
+    filePath='Data/'+file+'.csv'
+    dates, prices,total_shares = loadCsv(filePath)
 
     print("Select a stock price model:")
     print("1. Linear Regression")
@@ -102,10 +103,10 @@ def main():
     print("Integration complete. Plotting results...")
 
     plt.figure(figsize=(12, 6))
-    plt.plot(dates[:-1], integrated_prices, label="Integrated Stock Price")
+    plt.plot(dates[:-1], integrated_prices, label="Market Cap")
     plt.xlabel("Date")
-    plt.ylabel("Stock Price ($)")
-    plt.title("Stock Price Integration")
+    plt.ylabel("Market Cap ($)")
+    plt.title("Daily Market Cap")
     plt.legend()
     plt.grid()
     plt.show()
