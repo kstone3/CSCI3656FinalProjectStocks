@@ -58,8 +58,8 @@ def loadCsv(file_path):
     return dates, prices,total_shares
 
 def main():
-    #file_path = input("Enter the CSV file path: ")
-    file='META'
+    #file = input("Enter the stock name: ")
+    file='QQQ'
     filePath='Data/'+file+'.csv'
     dates, prices,total_shares = loadCsv(filePath)
 

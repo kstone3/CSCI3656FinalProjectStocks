@@ -169,12 +169,12 @@ def plot_stock_prices(dates, prices, lagrange_x, lagrange_prices, spline_x, spli
     plt.show()
 
 # Load the stock price data from the CSV file
-file_path = "META.csv"  # Update with your CSV file path
-dates, prices = load_csv(file_path)
+# file_path = "META.csv"  # Update with your CSV file path
+# dates, prices = load_csv(file_path)
 
-# Interpolate the current prices using Lagrange and cubic splines
-lagrange_x, lagrange_prices = interpolate_with_lagrange(dates, prices)
-spline_x, spline_prices = interpolate_with_splines(dates, prices)
+# # Interpolate the current prices using Lagrange and cubic splines
+# lagrange_x, lagrange_prices = interpolate_with_lagrange(dates, prices)
+# spline_x, spline_prices = interpolate_with_splines(dates, prices)
 
-# Plot the results
-plot_stock_prices(dates, prices, lagrange_x, lagrange_prices, spline_x, spline_prices)
+# # Plot the results
+# plot_stock_prices(dates, prices, lagrange_x, lagrange_prices, spline_x, spline_prices)

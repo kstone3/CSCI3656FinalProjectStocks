@@ -96,14 +96,14 @@ def plot_linear_regression_prediction(dates, prices, future_days, predictions, t
     plt.show()
 
 # Main Script
-file_path = "Bitcoin.csv"  # Path to the CSV file containing stock data
-dates, prices = load_csv(file_path)  # Load dates and prices from the CSV
+# file_path = "Bitcoin.csv"  # Path to the CSV file containing stock data
+# dates, prices = load_csv(file_path)  # Load dates and prices from the CSV
 
-future_days = 50  # Number of days to predict into the future
-training_window = 365  # Number of most recent data points to use for training
+# future_days = 50  # Number of days to predict into the future
+# training_window = 365  # Number of most recent data points to use for training
 
-# Predict stock prices using Linear Regression
-linear_predictions = predict_with_linear_regression(dates, prices, future_days, training_window)
+# # Predict stock prices using Linear Regression
+# linear_predictions = predict_with_linear_regression(dates, prices, future_days, training_window)
 
-# Plot the historical data and predictions
-plot_linear_regression_prediction(dates, prices, future_days, linear_predictions, training_window)
+# # Plot the historical data and predictions
+# plot_linear_regression_prediction(dates, prices, future_days, linear_predictions, training_window)
